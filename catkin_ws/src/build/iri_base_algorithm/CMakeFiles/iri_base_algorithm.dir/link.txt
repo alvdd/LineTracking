@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -g  -shared -Wl,-soname,libiri_base_algorithm.so -o ../../devel/lib/libiri_base_algorithm.so  

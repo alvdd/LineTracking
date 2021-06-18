@@ -1,8 +1,0 @@
-prefix=/home/alvaro/coche/catkin_ws/devel
-
-Name: seat_car_control
-Description: Description of seat_car_control
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

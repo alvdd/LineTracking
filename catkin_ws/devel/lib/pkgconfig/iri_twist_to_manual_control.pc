@@ -1,8 +1,0 @@
-prefix=/home/alvaro/coche/catkin_ws/devel
-
-Name: iri_twist_to_manual_control
-Description: Description of iri_twist_to_manual_control
-Version: 0.0.0
-Cflags: -I/home/alvaro/coche/catkin_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: iri_base_algorithm std_msgs geometry_msgs
