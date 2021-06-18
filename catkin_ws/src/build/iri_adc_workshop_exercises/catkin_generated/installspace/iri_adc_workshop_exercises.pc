@@ -1,0 +1,8 @@
+prefix=/home/alvaro/coche/catkin_ws/src/install
+
+Name: iri_adc_workshop_exercises
+Description: Description of iri_adc_workshop_exercises
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: ar_track_alvar_msgs cv_bridge roscpp

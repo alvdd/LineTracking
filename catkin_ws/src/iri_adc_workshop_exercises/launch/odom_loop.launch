@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- -->
+<launch>
+  
+  <arg name="name" default="odom_loop"/>
+  <arg name="speed_topic"    default="/manual_control/speed"/>
+  <arg name="steering_topic" default="/steering"/>
+  
+  <node pkg ="iri_adc_workshop_exercises"
+        type="odom_loop"
+        name="$(arg name)"
+        output="screen"
+        required="true">
+    <remap from="~odom"     to="/odom"/>
+    <remap from="~cmd_vel"  to="$(arg name)/cmd_vel"/>
+    <param name="speed"          value="0.5"/>
+    <param name="steering"       value="0.5"/>
+    <param name="offset_time"    value="0.25"/>
+    <param name="dist_threshold" value="0.2"/>
+  </node>
+  
+  <include file="$(find iri_twist_to_manual_control)/launch/node.launch">
+    <arg name="node_name"       value="$(arg name)_twist_to_manual_control"/>
+    <arg name="invert_speed"    value="False"/>
+    <arg name="invert_steering" value="True"/>
+    <arg name="twist_topic"     value="$(arg name)/cmd_vel"/>
+    <arg name="steering_topic"  value="$(arg steering_topic)"/>
+    <arg name="speed_topic"     value="$(arg speed_topic)"/>
+  </include>
+
+</launch>

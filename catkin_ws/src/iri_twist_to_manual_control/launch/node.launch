@@ -1,0 +1,37 @@
+<!-- -->
+<launch>
+  
+  <arg name="node_name" default="twist_to_manual_control"/>
+  <arg name="invert_speed"    default="False"/>
+  <arg name="invert_steering" default="True"/>
+  <arg name="twist_topic"     default="/cmd_vel"/>
+  <arg name="steering_topic"  default="/steering"/>
+  <arg name="speed_topic"     default="/manual_control/speed"/>
+
+  <node pkg ="iri_twist_to_manual_control"
+        type="iri_twist_to_manual_control"
+        name="$(arg node_name)"
+        output="screen">
+    <remap from="~cmd_vel"  to="$(arg twist_topic)"/>
+    <remap from="~steering" to="$(arg steering_topic)"/>
+    <remap from="~speed"    to="$(arg speed_topic)"/>
+      
+    <param name="steering_min"  value="0"/>
+    <param name="steering_zero" value="90"/>
+    <param name="steering_max"  value="180"/>
+
+    <param name="angular_sat_min" value="-1.0"/>
+    <param name="angular_sat_max" value="1.0"/>
+    
+    <param name="speed_min"  value="-1000"/>
+    <param name="speed_zero" value="0"/>
+    <param name="speed_max"  value="1000"/>
+    
+    <param name="linear_sat_min" value="-1.0"/>
+    <param name="linear_sat_max" value="1.0"/>
+    
+    <param name="invert_speed"    value="$(arg invert_speed)"/>
+    <param name="invert_steering" value="$(arg invert_steering)"/>
+  </node>
+
+</launch>

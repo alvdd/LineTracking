@@ -1,0 +1,8 @@
+prefix=/home/alvaro/coche/catkin_ws/src/install
+
+Name: road_description
+Description: Description of road_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

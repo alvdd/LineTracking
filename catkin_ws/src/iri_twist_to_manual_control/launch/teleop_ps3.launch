@@ -1,0 +1,82 @@
+<!-- -->
+<launch>
+
+  <!--
+  How to connect ps3joy to computer:
+  1. Set udev rules:
+      - Copy config/99-ps3joy.rules in /etc/udev/rules.d
+      - sudo service udev restart
+  2. Plug ps3 pad with usb cable to computer and press pairing central button (or use bluetooth)
+      - Device should appear as /dev/input/ps3joy
+  3. To fix issue where "pad is detected as a mouse":
+      - xinput disable "Sony PLAYSTATION(R)3 Controller"
+  -->
+
+  <arg name="name" default="teleop_ps3"/>
+  <arg name="dev"  default="/dev/input/ps3joy"/>
+  <arg name="config_filepath" default="$(find iri_twist_to_manual_control)/config/ps3.yaml" />
+  <arg name="speed_topic"    default="/manual_control/speed"/>
+  <arg name="steering_topic" default="/steering"/>
+
+  <node pkg="joy" type="joy_node" name="joy_node">
+    <param name="dev" value="$(arg dev)" />
+    <param name="deadzone" value="0.12" />
+    <param name="autorepeat_rate" value="20" />
+  </node>
+
+  <node pkg="teleop_twist_joy" name="$(arg name)" type="teleop_node">
+    <rosparam command="load" file="$(arg config_filepath)" />
+    <remap from="cmd_vel" to="$(arg name)/cmd_vel"/>
+  </node>
+
+  <include file="$(find iri_twist_to_manual_control)/launch/node.launch">
+    <arg name="node_name"       value="$(arg name)_twist_to_manual_control"/>
+    <arg name="invert_speed"    value="False"/>
+    <arg name="invert_steering" value="True"/>
+    <arg name="twist_topic"     value="$(arg name)/cmd_vel"/>
+    <arg name="steering_topic"  value="$(arg steering_topic)"/>
+    <arg name="speed_topic"     value="$(arg speed_topic)"/>
+  </include>
+
+</launch>
+
+<!-- 
+  [PS3 TELEOP BUTTONS]
+    Dead man button:         R1 (normal speed) or R2 (turbo/double speed)
+    Forward/backward speed:  Left joystick up/down
+    Left/Right steering      Right joystick left/right 
+-->
+
+<!--
+[PAIR/RUN PS3PAD WITH BLUETOOTH]
+  [EXTERNAL LAPTOP]
+    [INSTALL]
+      $ sudo apt-get install sixad
+      $ sudo apt-get install ros-indigo-ps3joy
+    [CONNCTED USB-PS3]
+      $ sudo /usr/sbin/sixpair
+      - Assigned bluetooth address
+    [DISCONECTED USB-PS3]
+      $ sudo /usr/sbin/update-rc.d -f sixad remove
+      $ sudo /usr/sbin/update-rc.d -f sixad defaults
+      $ sudo /etc/init.d/sixad restart
+      - Press pad PS button, should vibrate when linked
+  [ONBOARD PC - Odroid ARM]
+    [INSTALL][https://github.com/rdepena/node-dualshock-controller/wiki/Pairing-The-Dual-shock-3-controller-in-Linux-(Ubuntu-Debian)]
+      [DEPS]
+        $ sudo apt-get install bluez-utils bluez-compat bluez-hcidump checkinstall libusb-dev libbluetooth-dev joystick pyqt4-dev-tools
+      [SIXPAIR]
+        $ mkdir -p ~/ps3 && cd ~/ps3
+        $ wget http://www.pabr.org/sixlinux/sixpair.c
+        $ gcc -o sixpair sixpair.c -lusb
+        $ ./sixpair
+      [SIXAD]
+        $ mkdir -p ~/ps3 && cd ~/ps3
+        $ wget http://sourceforge.net/projects/qtsixa/files/QtSixA%201.5.1/QtSixA-1.5.1-src.tar.gz
+        $ tar xfvz QtSixA-1.5.1-src.tar.gz
+        $ cd QtSixA-1.5.1/sixad
+        - Fix: add  "#include <unistd.h>" in file shared.h
+        $ make
+        $ sudo mkdir -p /var/lib/sixad/profiles
+        $ sudo checkinstall
+-->

@@ -1,0 +1,23 @@
+<!-- -->
+<launch>
+
+  <arg name="camera" default="camera/rgb"/> <!-- usb_cam, camera/rgb -->
+  <arg name="marker_size" default="5.0"/>
+  <arg name="output_frame" default="camera_rgb_optical_frame"/> <!-- top_camera_optical , camera_rgb_optical_frame -->
+  <arg name="output_topic" default="/ar_markers"/>
+
+  <node name="ar_track_alvar" 
+        pkg="ar_track_alvar" 
+        type="individualMarkersNoKinect" 
+        respawn="false" 
+        output="screen">
+    <param name="marker_size"           type="double" value="$(arg marker_size)" />
+    <param name="max_new_marker_error"  type="double" value="0.08" />
+    <param name="max_track_error"       type="double" value="0.2" />
+    <param name="output_frame"          type="string" value="$(arg output_frame)" />
+    <remap from="/camera_image"   to="/$(arg camera)/image_raw" />
+    <remap from="/camera_info"    to="/$(arg camera)/camera_info" />
+    <remap from="/ar_pose_marker" to="$(arg output_topic)"/>
+  </node>
+
+</launch>

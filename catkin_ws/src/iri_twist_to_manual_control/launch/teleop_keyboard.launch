@@ -1,0 +1,28 @@
+<!-- -->
+<launch>
+
+  <arg name="name" default="teleop_keyboard"/>
+  <arg name="speed_topic"    default="/manual_control/speed"/>
+  <arg name="steering_topic" default="/steering"/>
+
+  <node pkg ="teleop_twist_keyboard" 
+        name="teleop_twist_keyboard" 
+        type="teleop_twist_keyboard.py" 
+        output="screen">
+    <remap from="cmd_vel" to="$(arg name)/cmd_vel"/>
+    <!--
+    <param name="~speed" value="0.25"/>
+    <param name="~turn" value="0.5"/>
+    -->
+  </node>
+
+  <include file="$(find iri_twist_to_manual_control)/launch/node.launch">
+    <arg name="node_name"       value="$(arg name)_twist_to_manual_control"/>
+    <arg name="invert_speed"    value="False"/>
+    <arg name="invert_steering" value="True"/>
+    <arg name="twist_topic"     value="$(arg name)/cmd_vel"/>
+    <arg name="steering_topic"  value="$(arg steering_topic)"/>
+    <arg name="speed_topic"     value="$(arg speed_topic)"/>
+  </include>
+
+</launch>

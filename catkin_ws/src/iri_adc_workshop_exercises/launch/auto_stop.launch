@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- -->
+<launch>
+  
+  <arg name="break_distance" default="0.5"/>
+  <arg name="angle" default="40"/>
+  
+  <node pkg="auto_stop"
+        type="auto_stop_node"
+        name="auto_stop"
+        output="screen">
+    <param name="angle_front"    type="int"     value="$(arg angle)" />
+    <param name="angle_back"     type="int"     value="$(arg angle)"/>
+    <param name="break_distance" type="double"  value="$(arg break_distance)"/>
+    <param name="break_distance_based_on_speed" type="bool"  value="false"/>
+  </node>
+</launch>

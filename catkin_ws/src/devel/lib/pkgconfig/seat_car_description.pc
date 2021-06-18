@@ -1,0 +1,8 @@
+prefix=/home/alvaro/coche/catkin_ws/src/devel
+
+Name: seat_car_description
+Description: Description of seat_car_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

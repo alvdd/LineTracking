@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot name="trafficlights" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="PI" value="3.1415926535897931" />
+  <xacro:include filename="$(find road_description)/urdf/trafficlight/trafficlight_macro.xacro" />
+  <xacro:include filename="$(find road_description)/urdf/trafficlight/signal_macro.xacro" />
+  <xacro:include filename="$(find road_description)/urdf/trafficlight/signal_square_macro.xacro" />
+
+  <link name="$(arg parent)">
+  </link>
+  
+
+  <xacro:signal_square name="roundabout1"
+                parent="$(arg parent)"
+                tag_dae="alvar5"
+                signal_dae="roundabout">
+    <origin xyz="1.49 -3.64 0" rpy="0 0 ${PI/6}"/>
+  </xacro:signal_square>
+  
+  <xacro:signal_square name="roundabout2"
+                parent="$(arg parent)"
+                tag_dae="alvar5"
+                signal_dae="roundabout">
+    <origin xyz="1.96 -5.58 0" rpy="0 0 ${-PI/6}"/>
+  </xacro:signal_square>
+  
+  <xacro:signal_square name="stop1"
+                parent="$(arg parent)"
+                tag_dae="alvar6"
+                signal_dae="stop">
+    <origin xyz="-3.76 -0.57 0" rpy="0 0 -${PI/4}"/>
+  </xacro:signal_square>
+ 
+  
+  <xacro:trafficlight name="semaphore_intersection1"
+                      parent="$(arg parent)"
+                      tag_dae="alvar0"
+                      light_color="red"
+                      light_material="Gazebo/RedGlow"
+                      light_material2="Gazebo/GreenGlow">
+    <origin xyz="-4.55 -4.5 0" rpy="0 0 0"/>
+  </xacro:trafficlight>
+  
+  <xacro:signal name="signal_left1"
+                parent="$(arg parent)"
+                tag_dae="alvar3"
+                signal_dae="arrow_left">
+    <origin xyz="1.83 -5.53 0" rpy="0 0 ${-4*PI/6}"/>
+  </xacro:signal>
+  
+  <xacro:signal name="signal_right1"
+                parent="$(arg parent)"
+                tag_dae="alvar2"
+                signal_dae="arrow_right">
+    <origin xyz="1.36 -3.73 0" rpy="0 0 ${-2*PI/6}"/>
+  </xacro:signal>
+
+</robot>

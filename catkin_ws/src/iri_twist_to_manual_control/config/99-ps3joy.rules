@@ -1,0 +1,2 @@
+SUBSYSTEMS=="input", KERNEL=="js[0-9]*", ATTRS{name}=="PLAYSTATION(R)3 Controller", SYMLINK+="input/ps3joy"
+SUBSYSTEMS=="input", KERNEL=="js[0-9]*", ATTRS{name}=="Sony PLAYSTATION(R)3 Controller", SYMLINK+="input/ps3joy"
