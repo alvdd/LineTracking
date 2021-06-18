@@ -1,0 +1,2 @@
+iri_adc_workshop_exercises:iri_base_algorithm:iri_twist_to_manual_control:seat_car_simulator/color_plugin:seat_car_simulator/road_description:seat_car_simulator/seat_car_control:seat_car_simulator/seat_car_controller:seat_car_simulator/seat_car_description:seat_car_simulator/seat_car_gazebo:seat_car_simulator/seat_car_simulator
+-DCATKIN_DEVEL_PREFIX=/home/alvaro/coche/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/alvaro/coche/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,17 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~steering_min" : \b [int] Minimum output steering value min: 0, default: 45, max: 180
+- \b "~steering_zero" : \b [int] Zero output steering value min: 0, default: 90, max: 180
+- \b "~steering_max" : \b [int] Maximum output steering value min: 0, default: 135, max: 180
+- \b "~angular_sat_min" : \b [double] Maximum input angular speed min: -5.0, default: -0.5, max: 5.0
+- \b "~angular_sat_max" : \b [double] Minimum input angular speed min: -5.0, default: 0.5, max: 5.0
+- \b "~speed_min" : \b [int] Minimum output speed value min: -1000, default: -500, max: 1000
+- \b "~speed_zero" : \b [int] Zero output speed value min: -1000, default: 0, max: 1000
+- \b "~speed_max" : \b [int] Maximum output speed value min: -1000, default: 500, max: 1000
+- \b "~linear_sat_min" : \b [double] Maximum input linear speed min: -5.0, default: -0.5, max: 5.0
+- \b "~linear_sat_max" : \b [double] Minimum input linear speed  min: -5.0, default: 0.5, max: 5.0
+- \b "~invert_speed" : \b [bool] Invert speed signum min: False, default: False, max: True
+- \b "~invert_steering" : \b [bool] Invert steering direction min: False, default: False, max: True
+
